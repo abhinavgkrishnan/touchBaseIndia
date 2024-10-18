@@ -1,0 +1,18 @@
+.loading {
+  background-color: var(--avatar-bg-color);
+  border-radius: 9999px;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  composes: pulse from global;
+}
+
+.avatar {
+  background-color: var(--avatar-bg-color);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: 9999px;
+}
+
+.blockies {
+  border-radius: 9999px;
+}

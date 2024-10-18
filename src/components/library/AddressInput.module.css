@@ -1,0 +1,96 @@
+.wrapper {
+  padding: 0.75rem 0.5rem;
+  background-color: var(--xmtp-address-input-bg-color);
+  border-bottom: 1px solid var(--xmtp-address-input-border-color);
+  display: flex;
+  align-items: center;
+  height: 4rem;
+}
+
+.resolved {
+  background-color: var(--xmtp-bg-color-primary);
+  border-bottom: 1px solid var(--xmtp-bg-color-secondary);
+}
+
+.element {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.label {
+  font-weight: 700;
+  margin-right: 0.5rem;
+  composes: text-sm from global;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 0.5rem;
+  flex-grow: 1;
+}
+
+.input {
+  color: var(--xmtp-text-color-primary);
+  font-family: var(--xmtp-font-family-mono);
+  background-color: transparent;
+  border: 0;
+  cursor: text;
+  height: 1rem;
+  composes: text-md from global;
+}
+
+.input:focus-visible {
+  outline: none;
+}
+
+.resolvedAddress {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem 0;
+  gap: 0.5rem;
+  font-size: var(--xmtp-font-size-md);
+}
+
+.displayAddress {
+  height: 1rem;
+  font-weight: 700;
+}
+
+.walletAddress {
+  font-family: var(--xmtp-font-family-mono);
+  font-size: var(--xmtp-font-size-sm);
+  line-height: 1.25rem;
+}
+
+.subtext {
+  color: rgb(107 114 128);
+  font-size: var(--xmtp-font-size-sm);
+  line-height: 1.25rem;
+  font-family: var(--xmtp-font-family-mono);
+}
+
+.error {
+  color: rgb(220 38 38);
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .leftIcon {
+    display: none;
+  }
+
+  .control {
+    margin-left: 1rem;
+  }
+
+  .input {
+    composes: text-sm from global;
+  }
+}

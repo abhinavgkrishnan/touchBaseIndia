@@ -1,0 +1,105 @@
+.wrapper {
+  display: flex;
+  background-color: var(--xmtp-bg-color-tertiary);
+  padding: 1rem;
+  border-bottom: 1px solid var(--xmtp-bg-color-secondary);
+  align-items: center;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: var(--xmtp-bg-color-secondary);
+}
+
+.loading {
+  padding: 1rem;
+}
+
+.element {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 0.75rem;
+}
+
+.domain {
+  color: var(--xmtp-color-white);
+  padding: 0 0.5rem;
+  background-color: var(--xmtp-color-indigo-600);
+  border-radius: 0.5rem;
+  margin-bottom: 0.25rem;
+  composes: text-sm from global;
+}
+
+.address {
+  composes: text-md from global;
+  color: var(--xmtp-text-color-primary);
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  color: var(--xmtp-text-color-secondary);
+  composes: text-md from global;
+  word-break: break-all;
+  align-self: stretch;
+  min-height: 21px;
+}
+
+.extra {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end;
+}
+
+.time {
+  text-align: right;
+  color: var(--xmtp-text-color-tertiary);
+  margin-left: 1rem;
+  composes: text-xs from global;
+}
+
+.consent {
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  background-color: gray;
+  color: white;
+  composes: text-xs from global;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.action {
+  flex-grow: 1;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  background-color: white;
+  color: #333;
+  composes: text-xs from global;
+  font-weight: bold;
+  border: 1px solid #eee;
+}
+
+.action:hover {
+  background-color: #eee;
+}
+
+.allow {
+  background-color: green;
+}
+
+.deny {
+  background-color: red;
+}
