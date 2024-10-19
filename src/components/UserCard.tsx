@@ -12,20 +12,20 @@ interface UserCardProps {
 const UserCard: React.FC<UserCardProps> = ({ data, address }) => {
   return (
     <div
-      className="bg-white bg-opacity-70 p-4 rounded flex items-center"
+      className="bg-white bg-opacity-60 p-3 rounded flex items-center"
       style={{ backdropFilter: "blur(10px)" }}
     >
       <img
         src={data.pfp}
         alt="Profile Picture"
-        className="w-16 h-16 rounded-full mr-4"
+        className="w-12 h-12 rounded-full mr-3"
       />
       <div className="overflow-hidden">
-        <h2 className="text-lg font-medium text-black truncate">
+        <h2 className="text-base font-medium text-black truncate">
           {data.basename}
         </h2>
-        <p className="text-gray-600 font-normal">{data.fid}</p>
-        <p className="text-gray-600 text-sm truncate">{address}</p>
+        <p className="text-gray-600 text-sm font-normal">FID: {data.fid}</p>
+        <p className="text-gray-600 text-xs truncate">{address}</p>
       </div>
     </div>
   );

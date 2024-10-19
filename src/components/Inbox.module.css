@@ -1,49 +1,82 @@
-.Inbox {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+.inbox {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: transparent;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.InboxHeader {
-  display: flex;
-  flex-shrink: 0;
+.inboxHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.InboxHeader__xmtp {
-  flex: 0 0 28rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px;
+.inboxHeaderXmtp {
+    display: flex;
+    align-items: center;
 }
 
-.InboxHeader__actions {
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-grow: 1;
+.inboxHeaderActions {
+    display: flex;
+    gap: 1rem;
 }
 
-.InboxConversations {
-  flex-grow: 1;
-  display: flex;
-  min-height: 0;
+.inboxConversations {
+    display: flex;
+    height: calc(100% - 64px); /* Subtract the header height */
 }
 
-.InboxConversations__list {
-  overflow-y: auto;
-  flex: 0 0 28rem;
-  background-color: #eee;
+.inboxConversationsList {
+    width: 30%;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-y: auto;
 }
 
-.InboxConversations__messages {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+.inboxConversationsMessages {
+    width: 70%;
+    overflow-y: auto;
 }
 
-.InboxConversations__messages > :nth-child(2) {
-  flex-grow: 1;
-  overflow: auto;
+/* Text styles */
+.inbox h1,
+.inbox h2,
+.inbox h3,
+.inbox h4,
+.inbox h5,
+.inbox h6 {
+    color: #ff69b4; /* Pink color for headings */
+    font-family: "Pricedown", cursive;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.inbox p,
+.inbox span,
+.inbox div {
+    color: #000000; /* Black color for regular text */
+}
+
+/* Add responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .inboxConversations {
+        flex-direction: column;
+    }
+
+    .inboxConversationsList,
+    .inboxConversationsMessages {
+        width: 100%;
+        height: 50%;
+    }
+
+    .inboxConversationsList {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
 }

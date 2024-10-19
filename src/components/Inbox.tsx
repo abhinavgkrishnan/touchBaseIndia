@@ -1,4 +1,4 @@
-import "./Inbox.module.css";
+import styles from "./Inbox.module.css";
 import { useCallback, useEffect, useState } from "react";
 import { useConsent, type CachedConversation } from "@xmtp/react-sdk";
 import {
@@ -47,12 +47,12 @@ export const Inbox: React.FC = () => {
   }, []);
 
   return (
-    <div className="Inbox">
-      <div className="InboxHeader">
-        <div className="InboxHeader__xmtp">
+    <div className={styles.inbox}>
+      <div className={styles.inboxHeader}>
+        <div className={styles.inboxHeaderXmtp}>
           <img src="/xmtp-icon.png" alt="XMTP logo" width="32" />
         </div>
-        <div className="InboxHeader__actions">
+        <div className={styles.inboxHeaderActions}>
           <Button
             icon={<PlusCircleIcon width={24} />}
             onClick={handleStartNewConversation}
@@ -68,14 +68,14 @@ export const Inbox: React.FC = () => {
           </Button>
         </div>
       </div>
-      <div className="InboxConversations">
-        <div className="InboxConversations__list">
+      <div className={styles.inboxConversations}>
+        <div className={styles.inboxConversationsList}>
           <Conversations
             onConversationClick={handleConversationClick}
             selectedConversation={selectedConversation}
           />
         </div>
-        <div className="InboxConversations__messages">
+        <div className={styles.inboxConversationsMessages}>
           {isNewMessage ? (
             <NewMessage onSuccess={handleStartNewConversationSuccess} />
           ) : selectedConversation ? (

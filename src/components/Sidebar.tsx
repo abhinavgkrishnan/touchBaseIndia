@@ -59,7 +59,11 @@ const Sidebar: React.FC<SidebarProps> = ({ activeOption, setActiveOption }) => {
               textAlign: "center",
             }}
           >
-            {option === 1 ? "FID Lookup" : `Option ${option}`}
+            {option === 1
+              ? "FID Lookup"
+              : option === 2
+                ? "XMTP Chat"
+                : `Option ${option}`}
           </li>
         ))}
       </ul>

@@ -11,7 +11,8 @@ export const WalletConnect: React.FC = () => {
       <Notification
         icon={<ExclamationTriangleIcon />}
         title="Error connecting to wallet"
-        cta={<ConnectButton />}>
+        cta={<ConnectButton />}
+      >
         Try connecting again
       </Notification>
     );
@@ -29,7 +30,8 @@ export const WalletConnect: React.FC = () => {
     <Notification
       icon={<LinkIcon />}
       title="No wallet connected"
-      cta={<ConnectButton />}>
+      cta={<ConnectButton />}
+    >
       Please connect a wallet to begin
     </Notification>
   );
