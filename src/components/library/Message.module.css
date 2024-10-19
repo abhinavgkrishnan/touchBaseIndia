@@ -1,53 +1,55 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: background-color 0.2s ease;
+    margin-top: 1.5rem; /* Add space above the message for reactions */
 }
 
 .wrapper:hover {
-  background-color: #eee;
+    background-color: transparent;
 }
 
 .wrapper.left {
-  align-items: flex-start;
+    align-items: flex-start;
 }
 
 .wrapper.right {
-  align-items: flex-end;
+    align-items: flex-end;
 }
 
 .content {
-  font-size: var(--xmtp-font-size-md);
-  padding: 0.5rem 0.75rem;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
-  margin-bottom: 0.25rem;
+    font-size: var(--xmtp-font-size-md);
+    padding: 0.5rem 0.75rem;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    margin-bottom: 0.25rem;
 }
 
 .time {
-  color: rgb(107 114 128);
-  font-size: var(--xmtp-font-size-sm);
-  line-height: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    color: rgb(107 114 128);
+    font-size: var(--xmtp-font-size-sm);
+    line-height: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .reactions {
-  display: none;
-  position: absolute;
-  top: 0;
-  margin-top: -0.5rem;
+    position: absolute;
+    top: -1.5rem; /* Position above the message */
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
 .wrapper.left .reactions {
-  right: 0;
+    left: 0; /* Align with the left side of the message */
 }
 
 .wrapper.right .reactions {
-  left: 0;
+    right: 0; /* Align with the right side of the message */
 }
 
 .wrapper:hover .reactions {
-  display: block;
+    opacity: 1;
 }

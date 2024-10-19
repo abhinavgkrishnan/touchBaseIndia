@@ -1,11 +1,29 @@
 .inbox {
+    font-family: "SF_Arborcrest", sans-serif;
+}
+
+.inboxHeader,
+.messagesHeader {
+    font-family: "Pricedown", sans-serif;
+}
+
+.inboxWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.inbox {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: transparent;
+    width: 1000px; /* Set a fixed width */
+    height: 800px; /* Set a fixed height */
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -17,6 +35,9 @@
     padding: 1rem;
     background-color: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 64px; /* Fixed height for the header */
+    color: #ff69b4 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
 }
 
 .inboxHeaderXmtp {
@@ -29,20 +50,33 @@
     gap: 1rem;
 }
 
-.inboxConversations {
+.inboxContent {
     display: flex;
     height: calc(100% - 64px); /* Subtract the header height */
+    overflow: hidden;
 }
 
 .inboxConversationsList {
-    width: 30%;
+    width: 300px; /* Fixed width */
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     overflow-y: auto;
 }
 
 .inboxConversationsMessages {
-    width: 70%;
-    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 700px; /* Fixed width to match Messages component */
+}
+
+.disconnectButton {
+    color: #ff69b4 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+.disconnectButton:hover {
+    background-color: rgba(255, 105, 180, 0.1) !important;
 }
 
 /* Text styles */
@@ -65,18 +99,18 @@
 
 /* Add responsive styles for smaller screens */
 @media (max-width: 768px) {
-    .inboxConversations {
+    .inboxContent {
         flex-direction: column;
     }
 
-    .inboxConversationsList,
-    .inboxConversationsMessages {
+    .inboxConversationsList {
         width: 100%;
         height: 50%;
-    }
-
-    .inboxConversationsList {
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .inboxConversationsMessages {
+        height: 50%;
     }
 }

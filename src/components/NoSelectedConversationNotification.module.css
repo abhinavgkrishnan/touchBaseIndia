@@ -1,0 +1,15 @@
+.notification {
+    text-align: center;
+    width: 700px;
+    height: 736px; /* Match the height of messagesWrapper */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+}

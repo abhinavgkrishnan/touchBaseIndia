@@ -1,5 +1,5 @@
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./Inbox.module.css";
-import { useCallback, useEffect, useState } from "react";
 import { useConsent, type CachedConversation } from "@xmtp/react-sdk";
 import {
   ArrowRightOnRectangleIcon,
@@ -47,44 +47,45 @@ export const Inbox: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.inbox}>
-      <div className={styles.inboxHeader}>
-        <div className={styles.inboxHeaderXmtp}>
-          <img src="/xmtp-icon.png" alt="XMTP logo" width="32" />
+    <div className={styles.inboxWrapper}>
+      <div className={styles.inbox}>
+        <div className={styles.inboxHeader}>
+          <div className={styles.inboxHeaderXmtp}>Chats</div>
+          <div className={styles.inboxHeaderActions}>
+            <Button
+              icon={<PlusCircleIcon width={24} />}
+              onClick={handleStartNewConversation}
+            >
+              New message
+            </Button>
+            <Button
+              secondary
+              onClick={handleDisconnect}
+              icon={<ArrowRightOnRectangleIcon width={24} />}
+              className={styles.disconnectButton}
+            >
+              Disconnect
+            </Button>
+          </div>
         </div>
-        <div className={styles.inboxHeaderActions}>
-          <Button
-            icon={<PlusCircleIcon width={24} />}
-            onClick={handleStartNewConversation}
-          >
-            New message
-          </Button>
-          <Button
-            secondary
-            onClick={handleDisconnect}
-            icon={<ArrowRightOnRectangleIcon width={24} />}
-          >
-            Disconnect
-          </Button>
-        </div>
-      </div>
-      <div className={styles.inboxConversations}>
-        <div className={styles.inboxConversationsList}>
-          <Conversations
-            onConversationClick={handleConversationClick}
-            selectedConversation={selectedConversation}
-          />
-        </div>
-        <div className={styles.inboxConversationsMessages}>
-          {isNewMessage ? (
-            <NewMessage onSuccess={handleStartNewConversationSuccess} />
-          ) : selectedConversation ? (
-            <Messages conversation={selectedConversation} />
-          ) : (
-            <NoSelectedConversationNotification
-              onStartNewConversation={handleStartNewConversation}
+        <div className={styles.inboxContent}>
+          <div className={styles.inboxConversationsList}>
+            <Conversations
+              onConversationClick={handleConversationClick}
+              selectedConversation={selectedConversation}
             />
-          )}
+          </div>
+          <div className={styles.inboxConversationsMessages}>
+            {isNewMessage ? (
+              <NewMessage onSuccess={handleStartNewConversationSuccess} />
+            ) : selectedConversation ? (
+              <Messages conversation={selectedConversation} />
+            ) : (
+              <NoSelectedConversationNotification
+                onStartNewConversation={handleStartNewConversation}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

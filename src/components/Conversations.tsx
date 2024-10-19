@@ -4,6 +4,7 @@ import { ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import { ConversationList } from "./library/ConversationList";
 import { Notification } from "./Notification";
 import { ConversationCard } from "./ConversationCard";
+import styles from "./Conversations.module.css";
 
 type ConversationsProps = {
   selectedConversation?: CachedConversation;
@@ -11,7 +12,10 @@ type ConversationsProps = {
 };
 
 const NoConversations: React.FC = () => (
-  <Notification icon={<ChatBubbleLeftIcon />} title="No conversations found">
+  <Notification
+    icon={<ChatBubbleLeftIcon className={styles.icon} />}
+    title="No conversations found"
+  >
     It looks like you don&rsquo;t have any conversations yet. Create one to get
     started
   </Notification>

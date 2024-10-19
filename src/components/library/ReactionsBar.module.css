@@ -1,26 +1,41 @@
 .wrapper {
-  padding: 0.25rem;
-  background-color: #eee;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent !important;
+    z-index: -1;
 }
 
 .option {
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  appearance: none;
-  border: 0;
-  padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    appearance: none;
+    border: none !important;
+    padding: 0.25rem;
+    background-color: transparent !important;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
 }
 
 .option:hover {
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  background-color: #ddd;
-  cursor: pointer;
+    background-color: transparent !important;
+    transform: scale(1.2);
+}
+
+.emoji {
+    font-size: 1.2rem;
 }

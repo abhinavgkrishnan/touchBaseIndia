@@ -1,14 +1,20 @@
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   useClient,
   useMessages,
   useSendMessage,
   useStreamMessages,
+  CachedConversation,
 } from "@xmtp/react-sdk";
-import type { CachedConversation } from "@xmtp/react-sdk";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ContentTypeReaction } from "@xmtp/content-type-reaction";
-import "./Messages.module.css";
 import { ContentTypeId } from "@xmtp/content-type-primitives";
+import styles from "./Messages.module.css";
 import { AddressInput } from "./library/AddressInput";
 import { Messages as MessagesList } from "./library/Messages";
 import { MessageInput } from "./library/MessageInput";
@@ -57,24 +63,30 @@ export const Messages: React.FC<ConversationMessagesProps> = ({
   }, [conversation]);
 
   return (
-    <>
-      <AddressInput
-        value={conversation.peerAddress}
-        avatarUrlProps={{ address: conversation.peerAddress }}
-      />
-      <MessagesList
-        conversation={conversation}
-        isLoading={isLoading}
-        messages={filteredMessages}
-        clientAddress={client?.address}
-      />
-      <div className="MessageInputWrapper">
-        <MessageInput
-          isDisabled={isSending}
-          onSubmit={handleSendMessage}
-          ref={messageInputRef}
-        />
+    <div className={styles.messagesWrapper}>
+      <div className={styles.messagesContent}>
+        <div className={styles.messagesHeader}>
+          <AddressInput
+            value={conversation.peerAddress}
+            avatarUrlProps={{ address: conversation.peerAddress }}
+          />
+        </div>
+        <div className={styles.messagesScrollContainer}>
+          <MessagesList
+            conversation={conversation}
+            isLoading={isLoading}
+            messages={filteredMessages}
+            clientAddress={client?.address}
+          />
+        </div>
+        <div className={styles.messageInputWrapper}>
+          <MessageInput
+            isDisabled={isSending}
+            onSubmit={handleSendMessage}
+            ref={messageInputRef}
+          />
+        </div>
       </div>
-    </>
+    </div>
   );
 };

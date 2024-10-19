@@ -1,3 +1,71 @@
-.MessageInputWrapper {
-  padding: 1rem;
+.messagesWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 736px; /* 600px - 64px (header height) */
+    width: 700px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.messagesHeader {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 60px;
+    position: sticky; /* Change to sticky positioning */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.messagesScrollContainer {
+    flex-grow: 1;
+    overflow-y: auto;
+    height: calc(100% - 120px); /* Subtract header and input heights */
+    padding: 1rem;
+    padding-top: 0; /* Remove top padding */
+    box-sizing: border-box;
+}
+
+.messageInputWrapper {
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    height: 60px;
+    position: sticky; /* Change to sticky positioning */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.messagesContent {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Ensure text is readable on the transparent background */
+.messagesWrapper,
+.messagesHeader,
+.messagesScrollContainer,
+.messageInputWrapper {
+    color: #ffffff; /* White color for text for better contrast */
+}
+
+/* Style scrollbar for webkit browsers */
+.messagesScrollContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messagesScrollContainer::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.messagesScrollContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
 }

@@ -1,10 +1,10 @@
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   isValidAddress,
   useCanMessage,
   useStartConversation,
+  CachedConversation,
 } from "@xmtp/react-sdk";
-import type { CachedConversation } from "@xmtp/react-sdk";
-import { useCallback, useEffect, useRef, useState } from "react";
 import "./NewMessage.module.css";
 import { AddressInput } from "./library/AddressInput";
 import { MessageInput } from "./library/MessageInput";
@@ -28,13 +28,30 @@ export const NewMessage: React.FC<NewMessageProps> = ({ onSuccess }) => {
 
   const handleStartConversation = useCallback(
     async (message: string) => {
+      console.log("handleStartConversation called", {
+        peerAddress,
+        isOnNetwork,
+        message,
+      });
       if (peerAddress && isOnNetwork) {
         setIsLoading(true);
-        const result = await startConversation(peerAddress, message);
-        setIsLoading(false);
-        if (result) {
-          onSuccess?.(result.cachedConversation);
+        try {
+          console.log("Starting conversation...");
+          const result = await startConversation(peerAddress, message);
+          console.log("Conversation result:", result);
+          setIsLoading(false);
+          if (result) {
+            console.log("Calling onSuccess");
+            onSuccess?.(result.cachedConversation);
+          } else {
+            console.log("No result from startConversation");
+          }
+        } catch (error) {
+          console.error("Error starting conversation:", error);
+          setIsLoading(false);
         }
+      } else {
+        console.log("Cannot start conversation", { peerAddress, isOnNetwork });
       }
     },
     [isOnNetwork, onSuccess, peerAddress, startConversation],
@@ -44,7 +61,15 @@ export const NewMessage: React.FC<NewMessageProps> = ({ onSuccess }) => {
     const checkAddress = async () => {
       if (isValidAddress(peerAddress)) {
         setIsLoading(true);
-        setIsOnNetwork(await canMessage(peerAddress));
+        console.log("Checking address:", peerAddress);
+        try {
+          const canMessageResult = await canMessage(peerAddress);
+          console.log("Can message result:", canMessageResult);
+          setIsOnNetwork(canMessageResult);
+        } catch (error) {
+          console.error("Error checking canMessage:", error);
+          setIsOnNetwork(false);
+        }
         setIsLoading(false);
       } else {
         setIsOnNetwork(false);

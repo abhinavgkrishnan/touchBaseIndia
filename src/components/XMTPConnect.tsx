@@ -1,15 +1,21 @@
+import React from "react";
 import { LinkIcon, ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { useClient } from "@xmtp/react-sdk";
 import { useCallback } from "react";
 import { useWalletClient } from "wagmi";
 import { Notification } from "./Notification";
 import { Button } from "./library/Button";
+import styles from "./XMTPConnect.module.css";
 
 type XMTPConnectButtonProps = {
   label: string;
+  isPink?: boolean;
 };
 
-const XMTPConnectButton: React.FC<XMTPConnectButtonProps> = ({ label }) => {
+const XMTPConnectButton: React.FC<XMTPConnectButtonProps> = ({
+  label,
+  isPink = false,
+}) => {
   const { initialize } = useClient();
   const { data: walletClient } = useWalletClient();
 
@@ -22,7 +28,11 @@ const XMTPConnectButton: React.FC<XMTPConnectButtonProps> = ({ label }) => {
     });
   }, [initialize, walletClient]);
 
-  return <Button onClick={handleConnect}>{label}</Button>;
+  return (
+    <Button onClick={handleConnect}>
+      <span className={isPink ? styles.pinkText : undefined}>{label}</span>
+    </Button>
+  );
 };
 
 export const XMTPConnect: React.FC = () => {
@@ -41,20 +51,12 @@ export const XMTPConnect: React.FC = () => {
   }
 
   if (isLoading) {
-    return (
-      <Notification icon={<LinkIcon />} title="Connecting to XMTP">
-        Awaiting signatures...
-      </Notification>
-    );
+    return <Notification title="Connecting to XMTP"></Notification>;
   }
 
   return (
     <Notification
-      icon={<LinkIcon />}
-      title="XMTP not connected"
-      cta={<XMTPConnectButton label="Connect" />}
-    >
-      Connect to XMTP to continue
-    </Notification>
+      cta={<XMTPConnectButton label="Connect to XMTP" isPink={true} />}
+    ></Notification>
   );
 };
