@@ -57,11 +57,11 @@ const FidLookup: React.FC<FidLookupProps> = ({ initialFid }) => {
       {" "}
       {/* Added padding-top here */}
       <h1 className="text-3xl font-bold mb-4" style={textStyle}>
-        FID Lookup Result
+        Find Based Folks on Farcaster
       </h1>
       {!initialFid && (
-        <p style={textStyle} className="text-xl">
-          Please sign in with Farcaster to view results.
+        <p style={textStyle} className="text-md">
+          Please sign in with Farcaster.
         </p>
       )}
       {isLoading ? (

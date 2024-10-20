@@ -9,31 +9,26 @@ import type {
 } from "@xmtp/react-sdk";
 import { Avatar } from "./Avatar";
 import styles from "./ConversationPreviewCard.module.css";
-import { shortAddress } from "../../helpers/shortAddress";
 
 type ConversationPreviewCardProps = {
-  /**
-   * Conversation to preview
-   */
   conversation: CachedConversation;
-  /**
-   * What is the last message of this conversation?
-   */
   lastMessage?: CachedMessage;
-  /**
-   * What happens on message click?
-   */
   onClick?: (conversation: CachedConversation) => void;
-  /**
-   * Is conversation selected?
-   */
   isSelected?: boolean;
   consentState: ConsentState;
+  displayName: string;
 };
 
 export const ConversationPreviewCard: React.FC<
   ConversationPreviewCardProps
-> = ({ conversation, onClick, isSelected, lastMessage, consentState }) => {
+> = ({
+  conversation,
+  onClick,
+  isSelected,
+  lastMessage,
+  consentState,
+  displayName,
+}) => {
   const { allow, deny } = useConsent();
   const attachment = lastMessage ? getAttachment(lastMessage) : undefined;
   let content: any;
@@ -78,12 +73,11 @@ export const ConversationPreviewCard: React.FC<
       role="button"
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      onClick={handleClick}>
+      onClick={handleClick}
+    >
       <Avatar address={conversation.peerAddress} />
       <div className={styles.element}>
-        <div className={styles.address}>
-          {shortAddress(conversation.peerAddress)}
-        </div>
+        <div className={styles.address}>{displayName}</div>
         <div className={styles.message}>{content}</div>
       </div>
       <div className={styles.extra}>
@@ -106,7 +100,8 @@ export const ConversationPreviewCard: React.FC<
             }}
             onClick={() => {
               void handleAllow();
-            }}>
+            }}
+          >
             Allow
           </div>
           <div
@@ -120,7 +115,8 @@ export const ConversationPreviewCard: React.FC<
             }}
             onClick={() => {
               void handleDeny();
-            }}>
+            }}
+          >
             Deny
           </div>
         </div>

@@ -1,120 +1,83 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import {
-  isValidAddress,
-  useCanMessage,
-  useStartConversation,
-  CachedConversation,
-} from "@xmtp/react-sdk";
-import "./NewMessage.module.css";
-import { AddressInput } from "./library/AddressInput";
-import { MessageInput } from "./library/MessageInput";
+import React, { useState } from "react";
+import { isValidAddress, useCanMessage } from "@xmtp/react-sdk";
+import Modal from "./Modal";
+import styles from "./NewMessage.module.css";
 
 type NewMessageProps = {
-  onSuccess?: (conversation?: CachedConversation) => void;
+  isOpen: boolean;
+  onClose: () => void;
+  onAddressFound: (address: string) => void;
 };
 
-export const NewMessage: React.FC<NewMessageProps> = ({ onSuccess }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [peerAddress, setPeerAddress] = useState("");
-  const [isOnNetwork, setIsOnNetwork] = useState(false);
+export const NewMessage: React.FC<NewMessageProps> = ({
+  isOpen,
+  onClose,
+  onAddressFound,
+}) => {
+  const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const { startConversation } = useStartConversation();
+  const [error, setError] = useState("");
   const { canMessage } = useCanMessage();
 
-  const handleChange = useCallback((updatedValue: string) => {
-    setPeerAddress(updatedValue);
-  }, []);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
 
-  const handleStartConversation = useCallback(
-    async (message: string) => {
-      console.log("handleStartConversation called", {
-        peerAddress,
-        isOnNetwork,
-        message,
+  const handleLookup = async () => {
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/lookup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ input }),
       });
-      if (peerAddress && isOnNetwork) {
-        setIsLoading(true);
-        try {
-          console.log("Starting conversation...");
-          const result = await startConversation(peerAddress, message);
-          console.log("Conversation result:", result);
-          setIsLoading(false);
-          if (result) {
-            console.log("Calling onSuccess");
-            onSuccess?.(result.cachedConversation);
-          } else {
-            console.log("No result from startConversation");
-          }
-        } catch (error) {
-          console.error("Error starting conversation:", error);
-          setIsLoading(false);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch address");
+      }
+
+      const { address } = await response.json();
+
+      if (address) {
+        const canMessageResult = await canMessage(address);
+        if (canMessageResult) {
+          onAddressFound(address);
+          onClose();
+        } else {
+          setError("This address is not on the XMTP network");
         }
       } else {
-        console.log("Cannot start conversation", { peerAddress, isOnNetwork });
+        setError("No matching address found");
       }
-    },
-    [isOnNetwork, onSuccess, peerAddress, startConversation],
-  );
-
-  useEffect(() => {
-    const checkAddress = async () => {
-      if (isValidAddress(peerAddress)) {
-        setIsLoading(true);
-        console.log("Checking address:", peerAddress);
-        try {
-          const canMessageResult = await canMessage(peerAddress);
-          console.log("Can message result:", canMessageResult);
-          setIsOnNetwork(canMessageResult);
-        } catch (error) {
-          console.error("Error checking canMessage:", error);
-          setIsOnNetwork(false);
-        }
-        setIsLoading(false);
-      } else {
-        setIsOnNetwork(false);
-      }
-    };
-    void checkAddress();
-  }, [canMessage, peerAddress]);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
-
-  let subtext: string | undefined;
-  let isError = false;
-  if (peerAddress === "") {
-    subtext = "Enter a 0x wallet address";
-  } else if (isLoading) {
-    subtext = "Finding address on the XMTP network...";
-  } else if (!isValidAddress(peerAddress)) {
-    subtext = "Please enter a valid 0x wallet address";
-  } else if (!isOnNetwork) {
-    subtext =
-      "Sorry, we can't message this address because its owner hasn't used it with XMTP yet";
-    isError = true;
-  }
+    } catch (error) {
+      setError("Error looking up address");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <>
-      <AddressInput
-        ref={inputRef}
-        subtext={subtext}
-        value={peerAddress}
-        onChange={handleChange}
-        isError={isError}
-        avatarUrlProps={{
-          address: isOnNetwork ? peerAddress : "",
-        }}
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <h2 className={styles.title}>Start New Conversation</h2>
+      <input
+        type="text"
+        value={input}
+        onChange={handleInputChange}
+        placeholder="Enter FC username or Basename"
+        className={styles.input}
       />
-      <div />
-      <div className="NewMessageInputWrapper">
-        <MessageInput
-          isDisabled={isLoading || !isValidAddress(peerAddress) || isError}
-          onSubmit={handleStartConversation}
-        />
-      </div>
-    </>
+      <button
+        onClick={handleLookup}
+        className={styles.button}
+        disabled={isLoading}
+      >
+        {isLoading ? "Looking up..." : "Start Chat"}
+      </button>
+      {error && <p className={styles.error}>{error}</p>}
+    </Modal>
   );
 };

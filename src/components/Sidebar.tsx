@@ -60,9 +60,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeOption, setActiveOption }) => {
             }}
           >
             {option === 1
-              ? "FID Lookup"
+              ? "Find Base"
               : option === 2
-                ? "XMTP Chat"
+                ? "Based Chat"
                 : `Option ${option}`}
           </li>
         ))}

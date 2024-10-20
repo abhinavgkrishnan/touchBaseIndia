@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./Inbox.module.css";
-import { useConsent, type CachedConversation } from "@xmtp/react-sdk";
+import {
+  useConsent,
+  useStartConversation,
+  type CachedConversation,
+} from "@xmtp/react-sdk";
 import {
   ArrowRightOnRectangleIcon,
   PlusCircleIcon,
@@ -15,36 +19,40 @@ import { Button } from "./library/Button";
 export const Inbox: React.FC = () => {
   const { disconnect } = useWallet();
   const { loadConsentList } = useConsent();
+  const { startConversation } = useStartConversation();
   const [selectedConversation, setSelectedConversation] = useState<
     CachedConversation | undefined
   >(undefined);
-  const [isNewMessage, setIsNewMessage] = useState(false);
+  const [isNewMessageModalOpen, setIsNewMessageModalOpen] = useState(false);
 
   const handleConversationClick = useCallback((convo: CachedConversation) => {
     setSelectedConversation(convo);
-    setIsNewMessage(false);
   }, []);
 
-  const handleStartNewConversation = useCallback(() => {
-    setIsNewMessage(true);
-  }, []);
-
-  const handleStartNewConversationSuccess = useCallback(
-    (convo?: CachedConversation) => {
-      setSelectedConversation(convo);
-      setIsNewMessage(false);
+  const handleAddressFound = useCallback(
+    async (address: string) => {
+      try {
+        // Instead of starting a conversation, just create it without sending a message
+        const conversation = await startConversation(address);
+        setSelectedConversation(conversation.cachedConversation);
+      } catch (error) {
+        console.error("Error creating conversation:", error);
+      }
     },
-    [],
+    [startConversation],
   );
 
   const handleDisconnect = useCallback(() => {
     disconnect();
   }, [disconnect]);
 
+  const handleStartNewConversation = useCallback(() => {
+    setIsNewMessageModalOpen(true);
+  }, []);
+
   useEffect(() => {
     void loadConsentList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loadConsentList]);
 
   return (
     <div className={styles.inboxWrapper}>
@@ -55,6 +63,7 @@ export const Inbox: React.FC = () => {
             <Button
               icon={<PlusCircleIcon width={24} />}
               onClick={handleStartNewConversation}
+              className="bg-pink-500 text-white px-4 py-2 rounded"
             >
               New message
             </Button>
@@ -76,9 +85,7 @@ export const Inbox: React.FC = () => {
             />
           </div>
           <div className={styles.inboxConversationsMessages}>
-            {isNewMessage ? (
-              <NewMessage onSuccess={handleStartNewConversationSuccess} />
-            ) : selectedConversation ? (
+            {selectedConversation ? (
               <Messages conversation={selectedConversation} />
             ) : (
               <NoSelectedConversationNotification
@@ -88,6 +95,11 @@ export const Inbox: React.FC = () => {
           </div>
         </div>
       </div>
+      <NewMessage
+        isOpen={isNewMessageModalOpen}
+        onClose={() => setIsNewMessageModalOpen(false)}
+        onAddressFound={handleAddressFound}
+      />
     </div>
   );
 };
