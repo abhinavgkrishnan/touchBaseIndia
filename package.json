@@ -30,6 +30,7 @@
     "axios": "^1.7.7",
     "csv-parse": "^5.5.6",
     "date-fns": "^3.6.0",
+    "ethers": "^6.13.4",
     "fetch-blob": "^4.0.0",
     "lit-html": "^3.2.1",
     "next": "^14.2.14",

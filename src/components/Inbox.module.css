@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     width: 1000px; /* Set a fixed width */
-    height: 800px; /* Set a fixed height */
+    height: 750px; /* Set a fixed height */
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
     border-radius: 8px;

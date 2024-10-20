@@ -62,8 +62,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeOption, setActiveOption }) => {
             {option === 1
               ? "Find Base"
               : option === 2
-                ? "Based Chat"
-                : `Option ${option}`}
+                ? "Based Talks"
+                : option === 3
+                  ? "Based Transfer"
+                  : `Option ${option}`}
           </li>
         ))}
       </ul>

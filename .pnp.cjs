@@ -54,6 +54,7 @@ const RAW_RUNTIME_STATE =
           ["esbuild", "npm:0.24.0"],\
           ["eslint", "npm:8.57.1"],\
           ["eslint-config-next", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:14.2.14"],\
+          ["ethers", "npm:6.13.4"],\
           ["fetch-blob", "npm:4.0.0"],\
           ["lit-html", "npm:3.2.1"],\
           ["next", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:14.2.15"],\
@@ -3767,6 +3768,7 @@ const RAW_RUNTIME_STATE =
           ["esbuild", "npm:0.24.0"],\
           ["eslint", "npm:8.57.1"],\
           ["eslint-config-next", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:14.2.14"],\
+          ["ethers", "npm:6.13.4"],\
           ["fetch-blob", "npm:4.0.0"],\
           ["lit-html", "npm:3.2.1"],\
           ["next", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:14.2.15"],\

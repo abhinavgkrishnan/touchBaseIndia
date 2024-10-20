@@ -1,28 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import FidLookup from "../components/FidLookup";
 import { AppController as XMTPApp } from "../controllers/AppController";
 import FarcasterSignIn from "../components/FarcasterSignIn";
+import WalletBalances from "../components/WalletBalances"; // Import the new component
 import "@rainbow-me/rainbowkit/styles.css";
 import {
   RainbowKitProvider,
   getDefaultConfig,
   ConnectButton,
 } from "@rainbow-me/rainbowkit";
-import { WagmiProvider, useAccount, useDisconnect } from "wagmi";
+import { WagmiProvider, useAccount, useDisconnect, useConnect } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@farcaster/auth-kit/styles.css";
 import { AuthKitProvider } from "@farcaster/auth-kit";
-import { mainnet } from "@wagmi/core/chains";
+import { mainnet, sepolia } from "@wagmi/core/chains";
 import { http } from "@wagmi/core";
 
 // Configuration for RainbowKit
 const config = getDefaultConfig({
   appName: "XMTP Next.js Example",
   projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  chains: [mainnet],
+  chains: [mainnet, sepolia],
   transports: {
     [mainnet.id]: http(),
+    [sepolia.id]: http(),
   },
   ssr: true,
 });
@@ -39,24 +41,101 @@ const farcasterConfig = {
 function HomeContent() {
   const [activeOption, setActiveOption] = useState(1);
   const [fid, setFid] = useState<number | null>(null);
-  const { isConnected } = useAccount();
+  const [results, setResults] = useState(null);
+  const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
+  const { connect, connectors } = useConnect();
+  const [isConnecting, setIsConnecting] = useState(false);
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      const storedConnectionState = localStorage.getItem("walletConnected");
+      if (storedConnectionState === "true" && !isConnected) {
+        setIsConnecting(true);
+        const connector = connectors.find((c) => c.ready);
+        if (connector) {
+          try {
+            await connect({ connector });
+          } catch (error) {
+            console.error("Failed to reconnect:", error);
+            localStorage.removeItem("walletConnected");
+          }
+        }
+        setIsConnecting(false);
+      }
+    };
+
+    checkConnection();
+  }, [isConnected, connect, connectors]);
+
+  useEffect(() => {
+    if (isConnected) {
+      localStorage.setItem("walletConnected", "true");
+    }
+  }, [isConnected]);
 
   const handleFidReceived = (receivedFid: number | null) => {
     setFid(receivedFid);
   };
 
   const handleSetActiveOption = (option: number) => {
-    if (option === 2) {
-      // Force disconnect when selecting XMTP option
-      disconnect();
+    if (activeOption === 1 && option !== 1) {
+      setResults(null);
+      setFid(null);
     }
+
     setActiveOption(option);
   };
 
+  const handleDisconnect = () => {
+    disconnect();
+    localStorage.removeItem("walletConnected");
+  };
+
+  if (!isConnected && !isConnecting) {
+    return (
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{
+          backgroundImage: "url(/gtabg.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <ConnectButton.Custom>
+          {({ openConnectModal }) => (
+            <button
+              onClick={openConnectModal}
+              type="button"
+              className="text-pink-400 text-4xl font-bold py-4 px-8 hover:bg-[#009333]"
+              style={{
+                transition: "all 0.3s ease",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+                clipPath: "polygon(10% 0, 100% 0, 90% 100%, 0 100%)",
+                padding: "0.75rem 1.5rem",
+                width: "50%",
+                textAlign: "center",
+              }}
+            >
+              Connect Wallet
+            </button>
+          )}
+        </ConnectButton.Custom>
+      </div>
+    );
+  }
+
+  if (isConnecting) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-white text-2xl">Connecting...</p>
+      </div>
+    );
+  }
+
   return (
     <div
-      className="min-h-screen flex"
+      className="min-h-screen flex relative"
       style={{
         backgroundImage: "url(/gtabg.jpg)",
         backgroundSize: "cover",
@@ -82,53 +161,25 @@ function HomeContent() {
           backgroundPosition: "center",
         }}
       >
-        {activeOption === 1 && <FidLookup initialFid={fid} />}
+        {activeOption === 1 && (
+          <FidLookup initialFid={fid} setResults={setResults} />
+        )}
         {activeOption === 2 && (
           <div className="h-full flex items-center justify-center">
-            {!isConnected && (
-              <ConnectButton.Custom>
-                {({ account, chain, openConnectModal, mounted }) => {
-                  return (
-                    <div
-                      {...(!mounted && {
-                        "aria-hidden": true,
-                        style: {
-                          opacity: 0,
-                          pointerEvents: "none",
-                          userSelect: "none",
-                        },
-                      })}
-                    >
-                      {(() => {
-                        if (!mounted || !account || !chain) {
-                          return (
-                            <button
-                              onClick={openConnectModal}
-                              type="button"
-                              className="text-pink-400 text-2xl font-bold py-2 px-4 transition-shadow duration-200 ease-in-out"
-                              style={{
-                                textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
-                              }}
-                            >
-                              Connect Wallet
-                            </button>
-                          );
-                        }
-                      })()}
-                    </div>
-                  );
-                }}
-              </ConnectButton.Custom>
-            )}
-            {isConnected && <XMTPApp key={`xmtp-app-${Date.now()}`} />}
+            <XMTPApp />
           </div>
         )}
-        {activeOption === 3 && (
-          <div>
-            <h1>Option 3 Content</h1>
-          </div>
-        )}
+        {activeOption === 3 && <WalletBalances />}{" "}
+        {/* Display WalletBalances for option 3 */}
       </div>
+
+      {/* Disconnect button */}
+      <button
+        onClick={handleDisconnect}
+        className="absolute bottom-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors duration-200"
+      >
+        Disconnect
+      </button>
     </div>
   );
 }
