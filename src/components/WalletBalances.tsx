@@ -33,6 +33,7 @@ const WalletBalances: React.FC = () => {
   const [selectedToken, setSelectedToken] = useState<Balance | null>(null);
   const [recipientInput, setRecipientInput] = useState("");
   const [transferAmount, setTransferAmount] = useState("");
+  const [transferSuccess, setTransferSuccess] = useState(false);
 
   const {
     data: transferData,
@@ -76,12 +77,23 @@ const WalletBalances: React.FC = () => {
   ]);
 
   useEffect(() => {
+    if (isSuccess) {
+      setTransferSuccess(true);
+      // Optionally, you can reset the success message after a few seconds
+      const timer = setTimeout(() => setTransferSuccess(false), 50000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
+
+  const duneApi = process.env.DUNE_API_KEY;
+
+  useEffect(() => {
     const fetchBalances = async () => {
       if (!address) return;
 
       const options = {
         method: "GET",
-        headers: { "X-Dune-Api-Key": "Cid5KAnCnnFvIPEdKDICozjk9KBMqNjy" },
+        headers: { "X-Dune-Api-Key": duneApi },
       };
 
       try {
@@ -142,6 +154,7 @@ const WalletBalances: React.FC = () => {
     }
 
     try {
+      setTransferSuccess(false);
       if (selectedToken.address === "native") {
         if (!sendTransaction) {
           throw new Error("Send transaction function is not available");
@@ -282,8 +295,8 @@ const WalletBalances: React.FC = () => {
                 {isLoading ? "Transferring..." : "Transfer"}
               </button>
             </div>
-            {isSuccess && (
-              <p className="text-green-60000 mt-2">Transfer successful!</p>
+            {transferSuccess && (
+              <p className="text-green-600 mt-2">Transfer successful!</p>
             )}
             {modalError && <p className="text-red-500 mt-2">{modalError}</p>}
           </div>
