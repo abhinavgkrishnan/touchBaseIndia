@@ -66,6 +66,6 @@ export default async function handler(
     console.error("Error in addressInfos API:", error);
     res
       .status(500)
-      .json({ message: "Error fetching address infos", error: error.message });
+      .json({ message: "Error fetching address infos ", error: error.message });
   }
 }

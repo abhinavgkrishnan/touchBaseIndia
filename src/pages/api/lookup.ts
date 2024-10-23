@@ -45,6 +45,6 @@ export default async function handler(
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error looking up address" });
+    res.status(500).json({ message: "Error looking up address " });
   }
 }

@@ -95,6 +95,6 @@ export default async function handler(
     res.status(200).json(fidBaseAddressMapTemp);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error fetching data" });
+    res.status(500).json({ message: "Error fetching data " });
   }
 }
