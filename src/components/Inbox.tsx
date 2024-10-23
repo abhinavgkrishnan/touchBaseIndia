@@ -15,7 +15,6 @@ import { NewMessage } from "./NewMessage";
 import { useWallet } from "../hooks/useWallet";
 import { NoSelectedConversationNotification } from "./NoSelectedConversationNotification";
 import { Button } from "./library/Button";
-import TransferERC20 from "./TransferERC20";
 
 export const Inbox: React.FC = () => {
   const { disconnect } = useWallet();
