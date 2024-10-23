@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import styles from "./Inbox.module.css";
 import {
   useConsent,
-  useStartConversation,
+  useConversation,
   type CachedConversation,
+  useClient,
 } from "@xmtp/react-sdk";
 import {
   ArrowRightOnRectangleIcon,
@@ -19,11 +20,13 @@ import { Button } from "./library/Button";
 export const Inbox: React.FC = () => {
   const { disconnect } = useWallet();
   const { loadConsentList } = useConsent();
-  const { startConversation } = useStartConversation();
   const [selectedConversation, setSelectedConversation] = useState<
     CachedConversation | undefined
   >(undefined);
   const [isNewMessageModalOpen, setIsNewMessageModalOpen] = useState(false);
+
+  const { client } = useClient();
+  const { conversations, loadConversations } = useConversation();
 
   const handleConversationClick = useCallback((convo: CachedConversation) => {
     setSelectedConversation(convo);
@@ -31,18 +34,29 @@ export const Inbox: React.FC = () => {
 
   const handleAddressFound = useCallback(
     async (address: string) => {
+      if (!client) {
+        console.error("XMTP client is not initialized");
+        return;
+      }
+
       try {
-        // Instead of starting a conversation, just create it without sending a message
-        const conversation = await startConversation({
-          peerAddress: address,
-          conversationId: null, // or provide a specific ID if needed
-        });
-        setSelectedConversation(conversation.cachedConversation);
+        const conversation =
+          await client.conversations.newConversation(address);
+        const cachedConversation = {
+          peerAddress: conversation.peerAddress,
+          topic: conversation.topic,
+          createdAt: conversation.createdAt,
+          // Add any other necessary properties
+        };
+        setSelectedConversation(cachedConversation as CachedConversation);
+        setIsNewMessageModalOpen(false);
+        // Reload conversations to include the new one
+        loadConversations();
       } catch (error) {
         console.error("Error creating conversation:", error);
       }
     },
-    [startConversation],
+    [client, loadConversations],
   );
 
   const handleDisconnect = useCallback(() => {
