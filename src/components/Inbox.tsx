@@ -46,7 +46,9 @@ export const Inbox: React.FC = () => {
           peerAddress: conversation.peerAddress,
           topic: conversation.topic,
           createdAt: conversation.createdAt,
-          // Add any other necessary properties
+          updatedAt: new Date(), // Use current time as updatedAt
+          isReady: true, // Assume the conversation is ready
+          walletAddress: client.address, // Use the client's address as walletAddress
         };
         setSelectedConversation(cachedConversation);
         setIsNewMessageModalOpen(false);
