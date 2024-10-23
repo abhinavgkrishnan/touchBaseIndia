@@ -21,12 +21,16 @@ type AddressInfo = {
   username?: string;
 };
 
+type Accumulator = {
+  [address: string]: AddressInfo;
+};
+
 const NoConversations: React.FC = () => (
   <Notification
     icon={<ChatBubbleLeftIcon className={styles.icon} />}
     title="No conversations found"
   >
-    It looks like you don’t have any conversations yet. Create one to get
+    It looks like you don't have any conversations yet. Create one to get
     started
   </Notification>
 );
@@ -56,17 +60,20 @@ export const Conversations: React.FC<ConversationsProps> = ({
         const data = await response.json();
 
         // Combine basename and username for each address
-        const combinedAddressInfos = addresses.reduce((acc, address) => {
-          const basename = data.base[address]?.basename;
-          const username = data.fc[address]?.username;
+        const combinedAddressInfos = addresses.reduce(
+          (acc: Accumulator, address) => {
+            const basename = data.base[address]?.basename;
+            const username = data.fc[address]?.username;
 
-          acc[address] = {
-            basename: basename || undefined,
-            username: username || undefined,
-          };
+            acc[address] = {
+              basename: basename || undefined,
+              username: username || undefined,
+            };
 
-          return acc;
-        }, {});
+            return acc;
+          },
+          {},
+        );
         console.log("sss", combinedAddressInfos);
         console.log("yyy", data);
 
