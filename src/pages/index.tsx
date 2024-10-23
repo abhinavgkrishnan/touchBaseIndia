@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import FidLookup from "../components/FidLookup";
 import { AppController as XMTPApp } from "../controllers/AppController";
-import FarcasterSignIn from "../components/FarcasterSignIn";
+import FarcasterSignIn from "../components/farcasterSignIn";
 import WalletBalances from "../components/WalletBalances"; // Import the new component
 import "@rainbow-me/rainbowkit/styles.css";
 import {
