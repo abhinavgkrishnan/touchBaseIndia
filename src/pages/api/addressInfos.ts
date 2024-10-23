@@ -1,7 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import sqlite3 from "sqlite3";
-import { open } from "sqlite";
-import * as path from "path";
+import { createClient } from "@libsql/client";
+
+const client = createClient({
+  url: process.env.TURSO_DATABASE_URL as string,
+  authToken: process.env.TURSO_AUTH_TOKEN as string,
+});
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,19 +17,6 @@ export default async function handler(
   const { addresses } = req.body;
 
   try {
-    const dbPath = path.join(
-      process.cwd(),
-      "src",
-      "pages",
-      "api",
-      "data",
-      "basedb.db",
-    );
-    const db = await open({
-      filename: dbPath,
-      driver: sqlite3.Database,
-    });
-
     const placeholders = addresses.map(() => "LOWER(?)").join(",");
     const queryBase = `
       SELECT address, name as basename
@@ -36,16 +26,19 @@ export default async function handler(
 
     const queryFc = `
       SELECT v.address as address, json_extract(p.data, '$.username') AS username
-        FROM verifications v
-        JOIN profiles p ON v.fid = p.fid
-        WHERE v.address IN (${placeholders})
-          AND json_valid(p.data) = 1
-      `;
+      FROM verifications v
+      JOIN profiles p ON v.fid = p.fid
+      WHERE v.address IN (${placeholders})
+        AND json_valid(p.data) = 1
+    `;
 
-    const resultsBase = await db.all(queryBase, addresses);
-    const resultsFc = await db.all(queryFc, addresses);
+    const resultsBase = await client.execute({
+      sql: queryBase,
+      args: addresses,
+    });
+    const resultsFc = await client.execute({ sql: queryFc, args: addresses });
 
-    const addressInfosBase = resultsBase.reduce((acc, result) => {
+    const addressInfosBase = resultsBase.rows.reduce((acc, result: any) => {
       const originalAddress = addresses.find(
         (addr) => addr.toLowerCase() === result.address.toLowerCase(),
       );
@@ -55,7 +48,7 @@ export default async function handler(
       return acc;
     }, {});
 
-    const addressInfosFc = resultsFc.reduce((acc, result) => {
+    const addressInfosFc = resultsFc.rows.reduce((acc, result: any) => {
       const originalAddress = addresses.find(
         (addr) => addr.toLowerCase() === result.address.toLowerCase(),
       );

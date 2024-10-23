@@ -31,6 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@farcaster/auth-kit", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:0.6.0"],\
           ["@farcaster/core", "npm:0.15.5"],\
           ["@heroicons/react", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:2.1.5"],\
+          ["@libsql/client", "npm:0.14.0"],\
           ["@rainbow-me/rainbowkit", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:2.2.0"],\
           ["@tanstack/query-core", "npm:5.59.13"],\
           ["@tanstack/react-query", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:5.59.15"],\
@@ -778,6 +779,126 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@libsql/client", [\
+      ["npm:0.14.0", {\
+        "packageLocation": "../../.yarn/berry/cache/@libsql-client-npm-0.14.0-d2d2e0bd8f-10c0.zip/node_modules/@libsql/client/",\
+        "packageDependencies": [\
+          ["@libsql/client", "npm:0.14.0"],\
+          ["@libsql/core", "npm:0.14.0"],\
+          ["@libsql/hrana-client", "npm:0.7.0"],\
+          ["js-base64", "npm:3.7.7"],\
+          ["libsql", "npm:0.4.6"],\
+          ["promise-limit", "npm:2.7.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/core", [\
+      ["npm:0.14.0", {\
+        "packageLocation": "../../.yarn/berry/cache/@libsql-core-npm-0.14.0-7383793b5e-10c0.zip/node_modules/@libsql/core/",\
+        "packageDependencies": [\
+          ["@libsql/core", "npm:0.14.0"],\
+          ["js-base64", "npm:3.7.7"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/darwin-arm64", [\
+      ["npm:0.4.6", {\
+        "packageLocation": "./.yarn/unplugged/@libsql-darwin-arm64-npm-0.4.6-5e9e135748/node_modules/@libsql/darwin-arm64/",\
+        "packageDependencies": [\
+          ["@libsql/darwin-arm64", "npm:0.4.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/darwin-x64", [\
+      ["npm:0.4.6", {\
+        "packageLocation": "./.yarn/unplugged/@libsql-darwin-x64-npm-0.4.6-524c348d32/node_modules/@libsql/darwin-x64/",\
+        "packageDependencies": [\
+          ["@libsql/darwin-x64", "npm:0.4.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/hrana-client", [\
+      ["npm:0.7.0", {\
+        "packageLocation": "../../.yarn/berry/cache/@libsql-hrana-client-npm-0.7.0-bf060c6e7d-10c0.zip/node_modules/@libsql/hrana-client/",\
+        "packageDependencies": [\
+          ["@libsql/hrana-client", "npm:0.7.0"],\
+          ["@libsql/isomorphic-fetch", "npm:0.3.1"],\
+          ["@libsql/isomorphic-ws", "npm:0.1.5"],\
+          ["js-base64", "npm:3.7.7"],\
+          ["node-fetch", "npm:3.3.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/isomorphic-fetch", [\
+      ["npm:0.3.1", {\
+        "packageLocation": "../../.yarn/berry/cache/@libsql-isomorphic-fetch-npm-0.3.1-8e2966dd20-10c0.zip/node_modules/@libsql/isomorphic-fetch/",\
+        "packageDependencies": [\
+          ["@libsql/isomorphic-fetch", "npm:0.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/isomorphic-ws", [\
+      ["npm:0.1.5", {\
+        "packageLocation": "../../.yarn/berry/cache/@libsql-isomorphic-ws-npm-0.1.5-d46a0b2a12-10c0.zip/node_modules/@libsql/isomorphic-ws/",\
+        "packageDependencies": [\
+          ["@libsql/isomorphic-ws", "npm:0.1.5"],\
+          ["@types/ws", "npm:8.5.12"],\
+          ["ws", "virtual:5e432aadc33f8dd97f002819f112fc33dd824a9b974fff7d1be96fe80d296be0d9fd5c307e09ab0f6599b33dd42d2ba6d26879dfb655bd0fdaa045c9796e1162#npm:8.18.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/linux-arm64-gnu", [\
+      ["npm:0.4.6", {\
+        "packageLocation": "./.yarn/unplugged/@libsql-linux-arm64-gnu-npm-0.4.6-916f0bbf9e/node_modules/@libsql/linux-arm64-gnu/",\
+        "packageDependencies": [\
+          ["@libsql/linux-arm64-gnu", "npm:0.4.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/linux-arm64-musl", [\
+      ["npm:0.4.6", {\
+        "packageLocation": "./.yarn/unplugged/@libsql-linux-arm64-musl-npm-0.4.6-8c290e7712/node_modules/@libsql/linux-arm64-musl/",\
+        "packageDependencies": [\
+          ["@libsql/linux-arm64-musl", "npm:0.4.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/linux-x64-gnu", [\
+      ["npm:0.4.6", {\
+        "packageLocation": "./.yarn/unplugged/@libsql-linux-x64-gnu-npm-0.4.6-7d7578095e/node_modules/@libsql/linux-x64-gnu/",\
+        "packageDependencies": [\
+          ["@libsql/linux-x64-gnu", "npm:0.4.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/linux-x64-musl", [\
+      ["npm:0.4.6", {\
+        "packageLocation": "./.yarn/unplugged/@libsql-linux-x64-musl-npm-0.4.6-db63e8ddd8/node_modules/@libsql/linux-x64-musl/",\
+        "packageDependencies": [\
+          ["@libsql/linux-x64-musl", "npm:0.4.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@libsql/win32-x64-msvc", [\
+      ["npm:0.4.6", {\
+        "packageLocation": "./.yarn/unplugged/@libsql-win32-x64-msvc-npm-0.4.6-92125bd471/node_modules/@libsql/win32-x64-msvc/",\
+        "packageDependencies": [\
+          ["@libsql/win32-x64-msvc", "npm:0.4.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@lit-labs/ssr-dom-shim", [\
       ["npm:1.2.1", {\
         "packageLocation": "../../.yarn/berry/cache/@lit-labs-ssr-dom-shim-npm-1.2.1-d14ce3e3e5-10c0.zip/node_modules/@lit-labs/ssr-dom-shim/",\
@@ -1182,6 +1303,15 @@ const RAW_RUNTIME_STATE =
           ["@motionone/vue", "npm:10.16.4"],\
           ["@motionone/dom", "npm:10.18.0"],\
           ["tslib", "npm:2.8.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@neon-rs/load", [\
+      ["npm:0.0.4", {\
+        "packageLocation": "../../.yarn/berry/cache/@neon-rs-load-npm-0.0.4-2905c29bd5-10c0.zip/node_modules/@neon-rs/load/",\
+        "packageDependencies": [\
+          ["@neon-rs/load", "npm:0.0.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2259,6 +2389,16 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/@types-trusted-types-npm-2.0.7-a07fc44f59-10c0.zip/node_modules/@types/trusted-types/",\
         "packageDependencies": [\
           ["@types/trusted-types", "npm:2.0.7"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/ws", [\
+      ["npm:8.5.12", {\
+        "packageLocation": "../../.yarn/berry/cache/@types-ws-npm-8.5.12-90c42288cf-10c0.zip/node_modules/@types/ws/",\
+        "packageDependencies": [\
+          ["@types/ws", "npm:8.5.12"],\
+          ["@types/node", "npm:22.7.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3742,6 +3882,7 @@ const RAW_RUNTIME_STATE =
           ["@farcaster/auth-kit", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:0.6.0"],\
           ["@farcaster/core", "npm:0.15.5"],\
           ["@heroicons/react", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:2.1.5"],\
+          ["@libsql/client", "npm:0.14.0"],\
           ["@rainbow-me/rainbowkit", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:2.2.0"],\
           ["@tanstack/query-core", "npm:5.59.13"],\
           ["@tanstack/react-query", "virtual:70533559bbecf6a2989db04e0ca68c6943e570920c13f00338f3528f191901cc151b999246c974794c496b1f6522257e7cd224a4b4ba22e3419134d61bd7c069#npm:5.59.15"],\
@@ -4415,6 +4556,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["data-uri-to-buffer", [\
+      ["npm:4.0.1", {\
+        "packageLocation": "../../.yarn/berry/cache/data-uri-to-buffer-npm-4.0.1-5c66a78beb-10c0.zip/node_modules/data-uri-to-buffer/",\
+        "packageDependencies": [\
+          ["data-uri-to-buffer", "npm:4.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["data-view-buffer", [\
       ["npm:1.0.1", {\
         "packageLocation": "../../.yarn/berry/cache/data-view-buffer-npm-1.0.1-d911beebce-10c0.zip/node_modules/data-view-buffer/",\
@@ -4708,6 +4858,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/detect-libc-npm-1.0.3-c30ac344d4-10c0.zip/node_modules/detect-libc/",\
         "packageDependencies": [\
           ["detect-libc", "npm:1.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:2.0.2", {\
+        "packageLocation": "../../.yarn/berry/cache/detect-libc-npm-2.0.2-03afa59137-10c0.zip/node_modules/detect-libc/",\
+        "packageDependencies": [\
+          ["detect-libc", "npm:2.0.2"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -5858,6 +6015,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["fetch-blob", [\
+      ["npm:3.2.0", {\
+        "packageLocation": "../../.yarn/berry/cache/fetch-blob-npm-3.2.0-28e01becfc-10c0.zip/node_modules/fetch-blob/",\
+        "packageDependencies": [\
+          ["fetch-blob", "npm:3.2.0"],\
+          ["node-domexception", "npm:1.0.0"],\
+          ["web-streams-polyfill", "npm:3.3.3"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:4.0.0", {\
         "packageLocation": "../../.yarn/berry/cache/fetch-blob-npm-4.0.0-562e0c5ab6-10c0.zip/node_modules/fetch-blob/",\
         "packageDependencies": [\
@@ -5997,6 +6163,16 @@ const RAW_RUNTIME_STATE =
           ["asynckit", "npm:0.4.0"],\
           ["combined-stream", "npm:1.0.8"],\
           ["mime-types", "npm:2.1.35"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["formdata-polyfill", [\
+      ["npm:4.0.10", {\
+        "packageLocation": "../../.yarn/berry/cache/formdata-polyfill-npm-4.0.10-e03013c013-10c0.zip/node_modules/formdata-polyfill/",\
+        "packageDependencies": [\
+          ["formdata-polyfill", "npm:4.0.10"],\
+          ["fetch-blob", "npm:3.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7187,6 +7363,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["js-base64", [\
+      ["npm:3.7.7", {\
+        "packageLocation": "../../.yarn/berry/cache/js-base64-npm-3.7.7-641cff09f0-10c0.zip/node_modules/js-base64/",\
+        "packageDependencies": [\
+          ["js-base64", "npm:3.7.7"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["js-sha3", [\
       ["npm:0.8.0", {\
         "packageLocation": "../../.yarn/berry/cache/js-sha3-npm-0.8.0-decf3ddcfa-10c0.zip/node_modules/js-sha3/",\
@@ -7352,6 +7537,24 @@ const RAW_RUNTIME_STATE =
           ["levn", "npm:0.4.1"],\
           ["prelude-ls", "npm:1.2.1"],\
           ["type-check", "npm:0.4.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["libsql", [\
+      ["npm:0.4.6", {\
+        "packageLocation": "./.yarn/unplugged/libsql-npm-0.4.6-53b676df4d/node_modules/libsql/",\
+        "packageDependencies": [\
+          ["libsql", "npm:0.4.6"],\
+          ["@libsql/darwin-arm64", "npm:0.4.6"],\
+          ["@libsql/darwin-x64", "npm:0.4.6"],\
+          ["@libsql/linux-arm64-gnu", "npm:0.4.6"],\
+          ["@libsql/linux-arm64-musl", "npm:0.4.6"],\
+          ["@libsql/linux-x64-gnu", "npm:0.4.6"],\
+          ["@libsql/linux-x64-musl", "npm:0.4.6"],\
+          ["@libsql/win32-x64-msvc", "npm:0.4.6"],\
+          ["@neon-rs/load", "npm:0.0.4"],\
+          ["detect-libc", "npm:2.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8110,6 +8313,16 @@ const RAW_RUNTIME_STATE =
           ["node-fetch", "npm:2.7.0"]\
         ],\
         "linkType": "SOFT"\
+      }],\
+      ["npm:3.3.2", {\
+        "packageLocation": "../../.yarn/berry/cache/node-fetch-npm-3.3.2-5267e015f2-10c0.zip/node_modules/node-fetch/",\
+        "packageDependencies": [\
+          ["node-fetch", "npm:3.3.2"],\
+          ["data-uri-to-buffer", "npm:4.0.1"],\
+          ["fetch-blob", "npm:3.2.0"],\
+          ["formdata-polyfill", "npm:4.0.10"]\
+        ],\
+        "linkType": "HARD"\
       }],\
       ["virtual:71c3c0570974c795b79987bb85d4a29514e196f75c7ca2bb56e80f88177e71cbbb73c9a0f02e781c6ccd33e5e8542eb2d0a05fb7aad876eea2872ec6993aa554#npm:2.7.0", {\
         "packageLocation": "./.yarn/__virtual__/node-fetch-virtual-749a5a9668/3/.yarn/berry/cache/node-fetch-npm-2.7.0-587d57004e-10c0.zip/node_modules/node-fetch/",\
@@ -9013,6 +9226,15 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/bluebird",\
           "bluebird"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["promise-limit", [\
+      ["npm:2.7.0", {\
+        "packageLocation": "../../.yarn/berry/cache/promise-limit-npm-2.7.0-cb930a295a-10c0.zip/node_modules/promise-limit/",\
+        "packageDependencies": [\
+          ["promise-limit", "npm:2.7.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -11396,6 +11618,15 @@ const RAW_RUNTIME_STATE =
           "react",\
           "typescript",\
           "viem"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["web-streams-polyfill", [\
+      ["npm:3.3.3", {\
+        "packageLocation": "../../.yarn/berry/cache/web-streams-polyfill-npm-3.3.3-f24b9f8c34-10c0.zip/node_modules/web-streams-polyfill/",\
+        "packageDependencies": [\
+          ["web-streams-polyfill", "npm:3.3.3"]\
         ],\
         "linkType": "HARD"\
       }]\

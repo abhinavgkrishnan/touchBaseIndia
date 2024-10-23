@@ -1,7 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import sqlite3 from "sqlite3";
-import { open } from "sqlite";
-import * as path from "path";
+import { createClient } from "@libsql/client";
+
+const client = createClient({
+  url: process.env.TURSO_DATABASE_URL as string,
+  authToken: process.env.TURSO_AUTH_TOKEN as string,
+});
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,19 +17,6 @@ export default async function handler(
   const { input } = req.body;
 
   try {
-    const dbPath = path.join(
-      process.cwd(),
-      "src",
-      "pages",
-      "api",
-      "data",
-      "basedb.db",
-    );
-    const db = await open({
-      filename: dbPath,
-      driver: sqlite3.Database,
-    });
-
     let query: string;
     let params: string[];
 
@@ -46,10 +36,10 @@ export default async function handler(
       params = [input];
     }
 
-    const result = await db.get(query, params);
+    const result = await client.execute({ sql: query, args: params });
 
-    if (result) {
-      res.status(200).json({ address: result.address });
+    if (result.rows.length > 0) {
+      res.status(200).json({ address: result.rows[0].address });
     } else {
       res.status(404).json({ message: "Address not found" });
     }
