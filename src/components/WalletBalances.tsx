@@ -37,7 +37,7 @@ const WalletBalances: React.FC = () => {
 
   const {
     data: transferData,
-    writeAsync: transferERC20,
+    write: transferERC20,
     isLoading: isERC20Loading,
     isSuccess: isERC20Success,
   } = useContractWrite({
