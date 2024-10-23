@@ -11,14 +11,15 @@ type NoSelectedConversationNotificationProps = {
 export const NoSelectedConversationNotification: React.FC<
   NoSelectedConversationNotificationProps
 > = ({ onStartNewConversation }) => (
-  <Notification
-    cta={
-      <Button onClick={onStartNewConversation}>Start new conversation</Button>
-    }
-    icon={<ChatBubbleLeftRightIcon className={styles.icon} />}
-    title="No conversation selected"
-    className={styles.notification}
-  >
-    Select a conversation to display its messages or start a new conversation
-  </Notification>
+  <div className={styles.notification}>
+    <Notification
+      cta={
+        <Button onClick={onStartNewConversation}>Start new conversation</Button>
+      }
+      icon={<ChatBubbleLeftRightIcon className={styles.icon} />}
+      title="No conversation selected"
+    >
+      Select a conversation to display its messages or start a new conversation
+    </Notification>
+  </div>
 );
