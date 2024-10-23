@@ -15,6 +15,8 @@
 
 **.db
 
+src/pages/api/data/basedb.db
+
 # production
 /build
 
