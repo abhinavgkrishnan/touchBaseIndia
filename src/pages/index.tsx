@@ -34,7 +34,7 @@ const queryClient = new QueryClient();
 const farcasterConfig = {
   relay: "https://relay.farcaster.xyz",
   rpcUrl: "https://mainnet.optimism.io",
-  domain: "localhost:3000",
+  domain: "touch-base-india.vercel.app",
   siweUri: "https://relay.farcaster.xyz/v1/auth/verify",
 };
 
