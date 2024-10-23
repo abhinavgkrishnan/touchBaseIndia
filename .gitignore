@@ -13,7 +13,6 @@
 /.next/
 /out/
 
-**.db
 
 # production
 /build
