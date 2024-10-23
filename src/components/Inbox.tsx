@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import styles from "./Inbox.module.css";
 import {
   useConsent,
-  useConversation,
+  useConversations,
   type CachedConversation,
   useClient,
 } from "@xmtp/react-sdk";
@@ -26,7 +26,7 @@ export const Inbox: React.FC = () => {
   const [isNewMessageModalOpen, setIsNewMessageModalOpen] = useState(false);
 
   const { client } = useClient();
-  const { conversations, loadConversations } = useConversation();
+  const { conversations } = useConversations();
 
   const handleConversationClick = useCallback((convo: CachedConversation) => {
     setSelectedConversation(convo);
@@ -42,21 +42,19 @@ export const Inbox: React.FC = () => {
       try {
         const conversation =
           await client.conversations.newConversation(address);
-        const cachedConversation = {
+        const cachedConversation: CachedConversation = {
           peerAddress: conversation.peerAddress,
           topic: conversation.topic,
           createdAt: conversation.createdAt,
           // Add any other necessary properties
         };
-        setSelectedConversation(cachedConversation as CachedConversation);
+        setSelectedConversation(cachedConversation);
         setIsNewMessageModalOpen(false);
-        // Reload conversations to include the new one
-        loadConversations();
       } catch (error) {
         console.error("Error creating conversation:", error);
       }
     },
-    [client, loadConversations],
+    [client],
   );
 
   const handleDisconnect = useCallback(() => {
