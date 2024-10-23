@@ -85,7 +85,7 @@ const WalletBalances: React.FC = () => {
     }
   }, [isSuccess]);
 
-  const duneApi = process.env.DUNE_API_KEY;
+  const duneApi = process.env.NEXT_PUBLIC_DUNE_API_KEY;
 
   useEffect(() => {
     const fetchBalances = async () => {
